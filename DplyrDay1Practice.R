@@ -24,7 +24,11 @@ help(starwars)
 # ARRANGE
 # Sort by bmi, highest first.
 
-
+starwars %>% 
+  select(name, height, mass, species, homeworld) %>% 
+  filter(height >= 180) %>% 
+  mutate(bmi = mass / (height/100)^2) %>% 
+  arrange(-bmi)
 
 
 # --------------------------------------------------
@@ -40,15 +44,19 @@ help(starwars)
 # ARRANGE:
 # Sort by mass, lowest first.
 
-
-
-
+starwars %>% 
+  mutate(height_m = height /100) %>% 
+  arrange(desc(mass)) %>% 
+  select(name, homeworld, species) %>% 
+  filter(species == "Human") 
+   
 
 # --------------------------------------------------
 # Reflection Questions:
 # --------------------------------------------------
 # Disclaimer: I haven't run these yet :) 
 # a) Which character has the highest BMI among those taller than 180 cm?
+
 # b) Who is the tallest human character in the dataset?
 # c) Which homeworld has the most characters taller than 180 cm?
 # d) Does the character with the highest BMI surprise you? Why or why not?
